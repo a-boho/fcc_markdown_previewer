@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Markdown Previewer</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+
+    <script src="./js/marked.js"></script>
+
+    <script>
+      function updatePreview() {
+        let previewElement = document.getElementById("preview");
+        let editorValue = document.getElementById("editor").value;
+        let markedUpHTML = marked.parse(editorValue, {breaks: true});
+
+        previewElement.innerHTML = markedUpHTML;
+      }
+
+      function setDefault() {
+        let defaultText = `\
+# aboho Markdown Previewer
+## freecodecamp project
+[Learn More about Andrew Boho](http://andrewboho.net)
+
+<dl>
+<dt>Definition list</dt>
+<dd>is something people use sometimes.</dd>
+
+<dt>Markdown in HTML</dt>
+<dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
+</dl>
+
+\`This is an inline code block.\`
+
+\`\`\`
+Multi-line
+Code
+Block
+\`\`\`
+
+- Code
+- All
+- Day
+
+> Blockquote. Blockquote. Blockquote.
+> Blockquote. Blockquote. Blockquote.
+> Blockquote. Blockquote. Blockquote.
+
+**Bolded Text**
+
+![Bitcoin](./img/bsv.png)
+        `;
+        let editorField = document.getElementById("editor");
+        let previewElement = document.getElementById("preview");
+        editorField.value = defaultText;
+        previewElement.innerHTML = marked.parse(defaultText, {breaks: true});
+      }
+    </script>
+  </head>
+
+  <body onload="setDefault()">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col text-center text-white bg-dark">
+          <h1>Markdown Previewer by aboho</h1>
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-6 bg-info d-flex flex-column">
+          <h2>Editor:</h2>
+          <hr>
+          <textarea id="editor" onkeyup="updatePreview()" class="form-control flex-grow-1"></textarea>
+        </div>
+
+        <div class="col-6 bg-secondary text-light">
+          <h2>Output:</h2>
+          <hr>
+          <div id="preview"></div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+  </body>
+</html>
